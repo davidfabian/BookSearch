@@ -29,11 +29,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
+                //dummy button action, to be replaced by actual search
                 TextView dummyone = (TextView) findViewById(R.id.DummyTextView);
                 dummyone.setText(searchView.getQuery());
                 dummyone.setVisibility(View.VISIBLE);
-                // Do your task here
-
+                Volume egykonyv = new Volume("az iro", "a konyv cime");
+                dummyone.setText(egykonyv.getAuthor());
                 return false;
             }
 
@@ -43,10 +44,14 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //testing button onclick
+
+                //dummy button action, to be replaced by actual search
                 TextView dummyone = (TextView) findViewById(R.id.DummyTextView);
                 dummyone.setText(searchView.getQuery());
                 dummyone.setVisibility(View.VISIBLE);
+                Volume egykonyv = new Volume("az iro", "a konyv cime");
+                dummyone.setText(egykonyv.getTitle());
+                QueryUtils.extractVolumes();
             }
         });
     }

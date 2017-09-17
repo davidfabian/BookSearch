@@ -8,7 +8,7 @@ public class Volume {
     private String author;
     private String title;
 
-    public void Volume(String auth, String tit){
+    public Volume(String auth, String tit) {
         author = auth;
         title = tit;
     }
