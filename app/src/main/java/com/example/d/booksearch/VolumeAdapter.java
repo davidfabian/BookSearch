@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 
 public class VolumeAdapter extends ArrayAdapter<Volume> {
-    public VolumeAdapter(Activity context, ArrayList<Volume> volumes) {
+    public VolumeAdapter(Activity context, ArrayList<Volume> volumes, String passingurl) {
         super(context, 0, volumes);
     }
 

@@ -24,7 +24,8 @@ import java.util.List;
 
 public final class QueryUtils {
 
-    private static final String GBAPI_URL = "https://www.googleapis.com/books/v1/volumes?q=android&maxResults=10";
+
+    //android&maxResults=10";
     //modify this according to API documentation for different results
 
     private static final String LOG_TAG = QueryUtils.class.getName();
@@ -37,6 +38,7 @@ public final class QueryUtils {
 
     //casting the url to URL format
     private static URL createUrl(String stringUrl) {
+        Log.e(LOG_TAG, stringUrl);
         URL url = null;
         try {
             url = new URL(stringUrl);
@@ -102,10 +104,11 @@ public final class QueryUtils {
     }
 
     //returns the list of earthquakes defined by the USGS_URL
-    public static List<Volume> extractVolumes() {
+    public static List<Volume> extractVolumes(String fullurl) {
         Log.e("extractvolume", "started");
         //prepare url
-        URL url = createUrl(GBAPI_URL);
+
+        URL url = createUrl(fullurl);
 
 
         // get json data from USGS with makeHttpRequest

@@ -2,6 +2,7 @@ package com.example.d.booksearch;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -24,14 +25,16 @@ public class VolumeActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Volume>> {
     private static final String LOG_TAG = VolumeActivity.class.getName();
     private static final int VOLUME_LOADER_ID = 1;
+    Intent volumeIntent = getIntent();
+    String passingurl = volumeIntent.getStringExtra("concUrlString");
     private VolumeAdapter mAdapter;
     private String statusmessage;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.volume_list);
+
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -53,8 +56,9 @@ public class VolumeActivity extends AppCompatActivity
         //VolumeAdapter volumeAdapter = new VolumeAdapter(this, volumes);
 
         //find listview to inflate and attach listview to adapter
+
         ListView listView = (ListView) findViewById(R.id.list);
-        mAdapter = new VolumeAdapter(this, new ArrayList<Volume>());
+        mAdapter = new VolumeAdapter(this, new ArrayList<Volume>(), passingurl);
         listView.setAdapter(mAdapter);
 
         // Get a reference to the LoaderManager, in order to interact with loaders.
@@ -69,7 +73,7 @@ public class VolumeActivity extends AppCompatActivity
 
     @Override
     public Loader<List<Volume>> onCreateLoader(int i, Bundle bundle) {
-        return new VolumeLoader(this);
+        return new VolumeLoader(this, passingurl);
     }
 
     @Override

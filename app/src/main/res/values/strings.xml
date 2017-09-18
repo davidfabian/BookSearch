@@ -4,4 +4,5 @@
     <string name="search_hint">Type your search term here.</string>
     <string name="no_author">No author info available</string>
     <string name="nointernet">No connection</string>
+    <string name="searchterm">iphone&amp;maxResults=10</string>
 </resources>

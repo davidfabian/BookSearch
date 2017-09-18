@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String GOOGLE_BOOKS_API_STUMP = "https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String GBAPI_BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String GBAPI_FINAL_URL = "&maxResults=10";
     // magyar&maxResults=10"
 
     @Override
@@ -31,9 +33,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                //dummy button action, to be replaced by actual search
-                Intent volumeIntent = new Intent(MainActivity.this, VolumeActivity.class);
-                startActivity(volumeIntent);
+
+                CallIntent();
                 return false;
             }
 
@@ -45,16 +46,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //intent to start search, display results
-                Intent volumeIntent = new Intent(MainActivity.this, VolumeActivity.class);
-                startActivity(volumeIntent);
+                CallIntent();
             }
         });
     }
 
     public String SearchTerm() {
         SearchView searchView = (SearchView) findViewById(R.id.searchview_volume);
+        Log.e("logtag", searchView.getQuery().toString());
         return searchView.getQuery().toString();
     }
 
+    public String UrlCreator() {
+        String urlString = GBAPI_BASE_URL + SearchTerm() + GBAPI_FINAL_URL;
+        Log.e("conc url: ", urlString);
+        return urlString;
+    }
 
+    public void CallIntent() {
+        String fullUrl = UrlCreator();
+        Intent volumeIntent = new Intent(MainActivity.this, VolumeActivity.class);
+        volumeIntent.putExtra("concUrlString", fullUrl);
+        startActivity(volumeIntent);
+    }
 }
