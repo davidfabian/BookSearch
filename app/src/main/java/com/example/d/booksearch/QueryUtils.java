@@ -843,23 +843,19 @@ public final class QueryUtils {
             JSONObject volumeList = new JSONObject(JSONDUMMY);
             JSONArray items = volumeList.getJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
-                Log.e("JSONitem ", "no " + i);
                 JSONObject currentVolume = items.getJSONObject(i);
                 JSONObject volumeInfo = currentVolume.getJSONObject("volumeInfo");
 
                 String title = volumeInfo.getString("title");
-                Log.e("title", "is: " + title);
 
                 try {
                     JSONArray authors = volumeInfo.getJSONArray("authors");
                     String author = authors.getString(0);
-                    Log.e("author", "is: " + author);
                     volumes.add(new Volume(title, author));
 
 
                 } catch (JSONException e) {
                     volumes.add(new Volume(title, "N/A"));
-                    Log.e("no author", "N/A");
                 }
 
 
