@@ -2,6 +2,7 @@ package com.example.d.booksearch;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.util.Log;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 
 public class VolumeLoader extends AsyncTaskLoader {
-
+    private static final String LOG_TAG = VolumeLoader.class.getName();
     //inferited  constructor
     public VolumeLoader(Context context) {
         super(context);
@@ -21,6 +22,7 @@ public class VolumeLoader extends AsyncTaskLoader {
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
+        Log.e(LOG_TAG, "onStartLoading");
         forceLoad();
     }
 
@@ -28,6 +30,7 @@ public class VolumeLoader extends AsyncTaskLoader {
     @Override
     public List<Volume> loadInBackground() {
         List<Volume> volumes = QueryUtils.extractVolumes();
+        Log.e(LOG_TAG, "loadinbackground");
         return volumes;
     }
 }
