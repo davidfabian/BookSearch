@@ -2,7 +2,6 @@ package com.example.d.booksearch;
 
 import android.app.LoaderManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -23,10 +22,9 @@ import java.util.List;
 
 public class VolumeActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<Volume>> {
+
     private static final String LOG_TAG = VolumeActivity.class.getName();
     private static final int VOLUME_LOADER_ID = 1;
-    Intent volumeIntent = getIntent();
-    String passingurl = volumeIntent.getStringExtra("concUrlString");
     private VolumeAdapter mAdapter;
     private String statusmessage;
 
@@ -35,6 +33,7 @@ public class VolumeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.volume_list);
 
+        String passingurl = getIntent().getStringExtra("concUrlString");
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -47,7 +46,6 @@ public class VolumeActivity extends AppCompatActivity
             statusmessage = getString(R.string.nointernet);
         }
 
-        Log.e(LOG_TAG, "volumeactivity created");
 
         //get the volumes in the list
         //ArrayList<Volume> volumes = (ArrayList<Volume>) QueryUtils.extractVolumes();
@@ -73,6 +71,7 @@ public class VolumeActivity extends AppCompatActivity
 
     @Override
     public Loader<List<Volume>> onCreateLoader(int i, Bundle bundle) {
+        String passingurl = getIntent().getStringExtra("concUrlString");
         return new VolumeLoader(this, passingurl);
     }
 
@@ -81,7 +80,6 @@ public class VolumeActivity extends AppCompatActivity
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (volumes != null && !volumes.isEmpty()) {
-            Log.e(LOG_TAG, "loader notempty & notnull");
             mAdapter.addAll(volumes);
         }
     }

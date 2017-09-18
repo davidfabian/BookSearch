@@ -105,9 +105,7 @@ public final class QueryUtils {
 
     //returns the list of earthquakes defined by the USGS_URL
     public static List<Volume> extractVolumes(String fullurl) {
-        Log.e("extractvolume", "started");
         //prepare url
-
         URL url = createUrl(fullurl);
 
 

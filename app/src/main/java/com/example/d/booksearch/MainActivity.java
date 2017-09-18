@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = MainActivity.class.getName();
     private static final String GBAPI_BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
     private static final String GBAPI_FINAL_URL = "&maxResults=10";
     // magyar&maxResults=10"
@@ -26,14 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //Log.e("onQueryTextChange", "called");
                 return false;
             }
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-
                 CallIntent();
                 return false;
             }
@@ -44,22 +42,26 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //intent to start search, display results
+                //check for valid search term, display warning if no text entered
+                if (SearchTerm().trim().length() < 1) {
+                    Toast toast = Toast.makeText(getApplicationContext(), getText(R.string.no_search_term_error), Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
                 CallIntent();
+                }
             }
         });
     }
 
     public String SearchTerm() {
+        String searchterm = null;
         SearchView searchView = (SearchView) findViewById(R.id.searchview_volume);
-        Log.e("logtag", searchView.getQuery().toString());
-        return searchView.getQuery().toString();
+        searchterm = searchView.getQuery().toString();
+        return searchterm;
     }
 
     public String UrlCreator() {
         String urlString = GBAPI_BASE_URL + SearchTerm() + GBAPI_FINAL_URL;
-        Log.e("conc url: ", urlString);
         return urlString;
     }
 
