@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,18 +43,10 @@ public class VolumeActivity extends AppCompatActivity
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         if (isConnected) {
-            statusmessage = getString(R.string.no_author);
+            statusmessage = getString(R.string.connecting);
         } else {
             statusmessage = getString(R.string.nointernet);
         }
-
-
-        //get the volumes in the list
-        //ArrayList<Volume> volumes = (ArrayList<Volume>) QueryUtils.extractVolumes();
-
-        //create adapter
-        //VolumeAdapter volumeAdapter = new VolumeAdapter(this, volumes);
-
         //find listview to inflate and attach listview to adapter
 
         ListView listView = (ListView) findViewById(R.id.list);
@@ -77,6 +71,14 @@ public class VolumeActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<List<Volume>> loader, List<Volume> volumes) {
+        Log.i(LOG_TAG, "load finished");
+
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
+        progressBar.setVisibility(View.GONE);
+
+        mAdapter.clear();
+
+
         // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (volumes != null && !volumes.isEmpty()) {

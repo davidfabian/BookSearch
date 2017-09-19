@@ -18,17 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
  */
 
-public final class QueryUtils {
-
-
-    //android&maxResults=10";
-    //modify this according to API documentation for different results
+final class QueryUtils {
 
     private static final String LOG_TAG = QueryUtils.class.getName();
+
     //JSON_RESPONSE static to used through the class
     private static String JSON_RESPONSE = "";
 
@@ -37,6 +35,7 @@ public final class QueryUtils {
     }
 
     //casting the url to URL format
+
     private static URL createUrl(String stringUrl) {
         Log.e(LOG_TAG, stringUrl);
         URL url = null;
@@ -104,11 +103,9 @@ public final class QueryUtils {
     }
 
     //returns the list of earthquakes defined by the USGS_URL
-    public static List<Volume> extractVolumes(String fullurl) {
+    static List<Volume> extractVolumes(String fullurl) {
         //prepare url
         URL url = createUrl(fullurl);
-
-
         // get json data from USGS with makeHttpRequest
         try {
             JSON_RESPONSE = makeHttpRequest(url);
@@ -126,27 +123,26 @@ public final class QueryUtils {
 
 
             JSONObject volumeList = new JSONObject(JSON_RESPONSE);
+            //if there are no results, display warning
+            int totalItems = volumeList.getInt("totalItems");
+            if (totalItems == 0) {
+                volumes.add(new Volume("No books match your search term. Try again!", "Oops!"));
+            }
             JSONArray items = volumeList.getJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
                 JSONObject currentVolume = items.getJSONObject(i);
                 JSONObject volumeInfo = currentVolume.getJSONObject("volumeInfo");
 
                 String title = volumeInfo.getString("title");
-
+                // if there is no author information, instead of crashing, the app adds N/A as author.
                 try {
                     JSONArray authors = volumeInfo.getJSONArray("authors");
                     String author = authors.getString(0);
                     volumes.add(new Volume(title, author));
-
-
                 } catch (JSONException e) {
                     volumes.add(new Volume(title, "N/A"));
                 }
-
-
             }
-
-
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message

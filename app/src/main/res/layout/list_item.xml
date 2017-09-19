@@ -8,13 +8,12 @@
 
     <TextView
         android:id="@+id/title_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Title of the book" />
+        style="@style/bookdisplay"
+        tools:text="dr. Author Writer" />
 
     <TextView
         android:id="@+id/author_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Author Book dr." />
+        style="@style/bookdisplay"
+        android:textColor="@android:color/black"
+        tools:text="Book Title" />
 </LinearLayout>

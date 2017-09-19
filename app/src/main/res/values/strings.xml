@@ -4,6 +4,8 @@
     <string name="search_hint">Type your search term here.</string>
     <string name="no_author">No author info available</string>
     <string name="nointernet">No connection</string>
-    <string name="searchterm">iphone&amp;maxResults=10</string>
+    <string name="try_again">Oops!</string>
+    <string name="no_results">There are no books matching your search term.</string>
     <string name="no_search_term_error">Please enter search term.</string>
+    <string name="connecting">Connecting</string>
 </resources>

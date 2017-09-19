@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final String GBAPI_BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
-    private static final String GBAPI_FINAL_URL = "&maxResults=10";
+    private static final String GBAPI_FINAL_URL = "&maxResults=40";
     // magyar&maxResults=10"
 
     @Override
@@ -61,8 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String UrlCreator() {
-        String urlString = GBAPI_BASE_URL + SearchTerm() + GBAPI_FINAL_URL;
-        return urlString;
+        return GBAPI_BASE_URL + SearchTerm().trim() + GBAPI_FINAL_URL;
     }
 
     public void CallIntent() {
