@@ -8,4 +8,8 @@
     <string name="no_results">There are no books matching your search term.</string>
     <string name="no_search_term_error">Please enter search term.</string>
     <string name="connecting">Connecting</string>
+    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_item">Settings</string>
+    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <string name="settings_title">Earthquake Settings</string>
 </resources>

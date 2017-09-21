@@ -28,13 +28,13 @@ public class VolumeActivity extends AppCompatActivity
     private static final String LOG_TAG = VolumeActivity.class.getName();
     private static final int VOLUME_LOADER_ID = 1;
     private VolumeAdapter mAdapter;
-    private String statusmessage;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.volume_list);
-
+        String statusmessage;
         String passingurl = getIntent().getStringExtra("concUrlString");
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
