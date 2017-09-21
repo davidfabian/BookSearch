@@ -12,4 +12,7 @@
     <string name="settings_menu_item">Settings</string>
     <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Earthquake Settings</string>
+    <string name="settings_min_results_label">Minimum No. of results</string>
+    <string name="settings_min_results_key" translatable="false">min_results</string>
+    <string name="settings_min_results_default" translatable="false">10</string>
 </resources>
