@@ -2,9 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
     <EditTextPreference
-        android:defaultValue="@string/settings_min_results_default"
+        android:defaultValue="@string/settings_max_results_default"
         android:inputType="numberDecimal"
-        android:key="@string/settings_min_results_key"
+        android:key="@string/settings_max_results_key"
         android:selectAllOnFocus="true"
-        android:title="@string/settings_min_results_label" />
+        android:title="@string/settings_max_results_label" />
 </PreferenceScreen>

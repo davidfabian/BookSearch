@@ -1,7 +1,10 @@
 package com.example.d.booksearch;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
@@ -13,7 +16,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getName();
-    private static final String GBAPI_BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
+    private static final String GBAPI_BASE_URL = "https://www.googleapis.com/books/v1/volumes?";
     private static final String GBAPI_FINAL_URL = "&maxResults=40";
     // magyar&maxResults=10"
 
@@ -79,7 +82,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String UrlCreator() {
-        return GBAPI_BASE_URL + SearchTerm().trim() + GBAPI_FINAL_URL;
+        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String maxresults = sharedprefs.getString(
+                getString(R.string.settings_max_results_key),
+                getString(R.string.settings_max_results_default));
+        Uri baseUri = Uri.parse(GBAPI_BASE_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("q", SearchTerm().trim());
+        uriBuilder.appendQueryParameter("maxResults", maxresults);
+        //return GBAPI_BASE_URL + SearchTerm().trim() + GBAPI_FINAL_URL;
+        return uriBuilder.toString();
     }
 
     public void CallIntent() {
