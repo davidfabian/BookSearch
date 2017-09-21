@@ -86,12 +86,17 @@ public class MainActivity extends AppCompatActivity {
         String maxresults = sharedprefs.getString(
                 getString(R.string.settings_max_results_key),
                 getString(R.string.settings_max_results_default));
+        String orderBy = sharedprefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
+
         Uri baseUri = Uri.parse(GBAPI_BASE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         uriBuilder.appendQueryParameter("q", SearchTerm().trim());
         uriBuilder.appendQueryParameter("maxResults", maxresults);
-        //return GBAPI_BASE_URL + SearchTerm().trim() + GBAPI_FINAL_URL;
+        uriBuilder.appendQueryParameter("orderBy", orderBy);
         return uriBuilder.toString();
     }
 
