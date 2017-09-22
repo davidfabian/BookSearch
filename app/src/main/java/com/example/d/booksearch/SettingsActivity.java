@@ -36,7 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
 //maxnoofresults getting and setting
             Preference maxNoOfResults = findPreference(getString(R.string.settings_max_results_key));
             bindPreferenceSummaryToValue(maxNoOfResults, getPreferenceValueToString(maxNoOfResults));
-//sortingroder getting and setting
+//sortingorder getting and setting
             Preference orderByKey = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderByKey, getPreferenceValueToString(orderByKey));
         }

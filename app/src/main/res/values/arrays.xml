@@ -10,11 +10,4 @@
         <item>@string/settings_order_by_most_recent_value</item>
     </string-array>
 
-    <integer-array name="settings_max_results_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </integer-array>
 </resources>
