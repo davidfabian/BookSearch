@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final String GBAPI_BASE_URL = "https://www.googleapis.com/books/v1/volumes?";
-    private static final String GBAPI_FINAL_URL = "&maxResults=40";
-    // magyar&maxResults=10"
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,13 +81,21 @@ public class MainActivity extends AppCompatActivity {
 
     public String UrlCreator() {
         SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         String maxresults = sharedprefs.getString(
                 getString(R.string.settings_max_results_key),
                 getString(R.string.settings_max_results_default));
+
         String orderBy = sharedprefs.getString(
                 getString(R.string.settings_order_by_key),
-                getString(R.string.settings_order_by_default)
-        );
+                getString(R.string.settings_order_by_default));
+
+        /*
+        if (Integer.parseInt(maxresults) > 40 || Integer.parseInt(maxresults) <=0) {
+            maxresults = "10";
+        }
+        */
+
 
         Uri baseUri = Uri.parse(GBAPI_BASE_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
